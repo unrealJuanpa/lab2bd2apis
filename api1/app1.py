@@ -9,7 +9,7 @@ db.connect()
 def add_data_tipoc():
     try:
         req_data = request.get_json()
-        Tipocontribuyente.create(nombre=req_data['nombre'], descripcion=req_data['descripcion'])
+        Tipocontribuyente.create(**req_data)
         Logs.create(informacion=f"Se ha creado el tipo contribuyente {req_data['nombre']} en el momento: {datetime.datetime.now()}")
         return jsonify({'message': 'Data added successfully'})
     except Exception as e:
@@ -34,7 +34,7 @@ def put_tipoc(id):
     req_data = request.get_json()
     
     try:
-        Tipocontribuyente.update(nombre=req_data['nombre'], descripcion=req_data['descripcion']).where(Tipocontribuyente.id==id).execute()
+        Tipocontribuyente.update(**req_data).where(Tipocontribuyente.id==id).execute()
         Logs.create(informacion=f"Se ha modificado el tipo contribuyente con id = {id} en el momento: {datetime.datetime.now()}")
         return jsonify({'message': 'Data updated successfully'})
     except Exception as e:
@@ -70,7 +70,7 @@ def postdv():
     try:
         req_data = request.get_json()
         ff = datetime.datetime.now()
-        Datosventa.create(nitcliente=req_data['nitcliente'], nombrecliente=req_data['nombrecliente'], fechahora=ff, total=req_data['total'], tipocontribuyente=req_data['tipocontribuyente'])
+        Datosventa.create(**req_data)
         Logs.create(informacion=f"Se ha creado el registro de venta para el cliente {req_data['nombrecliente']} en el momento: {ff}")
         return jsonify({'message': 'Data added successfully'})
     except Exception as e:
@@ -80,7 +80,7 @@ def postdv():
 def putdv(id):
     try:
         req_data = request.get_json()
-        Datosventa.update(nitcliente=req_data['nitcliente'], nombrecliente=req_data['nombrecliente'], total=req_data['total'], tipocontribuyente=req_data['tipocontribuyente']).where(Datosventa.id == id).execute()
+        Datosventa.update(**req_data).where(Datosventa.id == id).execute()
         Logs.create(informacion=f"Se ha modificado el registro de datos venta con id = {id} en el momento: {datetime.datetime.now()}")
         return jsonify({'message': 'Data updated successfully'})
     except Exception as e:
