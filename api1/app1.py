@@ -28,7 +28,7 @@ def manage_tipocontribuyente(id=None):
             Logs.create(informacion=f"Se ha eliminado el tipo contribuyente con el id = {id} en el momento: {datetime.datetime.now()}")
             return jsonify({'message': 'Data deleted successfully'})
     except Exception as e:
-        return jsonify({'message': e})
+        return jsonify({'message': str(e)})
 
 
 @app.route('/datosventa', methods=['GET', 'POST'])
@@ -54,7 +54,7 @@ def manage_datosventa(id=None):
             Logs.create(informacion=f"Se ha eliminado el registro de datos venta con el id = {id} en el momento: {datetime.datetime.now()}")
             return jsonify({'message': 'Data deleted successfully'})
     except Exception as e:
-        return jsonify({'message': e})
+        return jsonify({'message': str(e)})
 
 if __name__ == '__main__':
     app.run(port=5000)
