@@ -4,18 +4,21 @@ db = MySQLDatabase('lab2api2', user='root', password='', host='localhost', port=
 
 
 class Contabilidad(Model):
-    montoiva = DecimalField(max_digits=10, decimal_places=4)
-    totalsiniva = DecimalField(max_digits=10, decimal_places=4)
-    total = DecimalField(max_digits=10, decimal_places=4)
-    numeroventa = IntegerField()
+    montoiva = DecimalField(max_digits=10, decimal_places=4) # sale del total Datosventa
+    totalsiniva = DecimalField(max_digits=10, decimal_places=4) # sale del total Datosventa
+    total = DecimalField(max_digits=10, decimal_places=4) # sale del total Datosventa
+    numeroventa = IntegerField() # sale del id Datosventa
+    nombretipocontribuyente = CharField() # nombre tipocontribuyente sale de Tipocontribuyente
+    fechahora = DateTimeField() # sale del Datosventa
    
     class Meta:
         database = db
 
 class Fidelidadcliente(Model):
-    nitcliente = CharField()
-    contadorventas = IntegerField()
-    montobonos = DecimalField(max_digits=10, decimal_places=4)
+    nitcliente = CharField() # sale del nitcliente Datosventa
+    nombrecliente = CharField() # nombrecliente Datosventa
+    contadorventas = IntegerField() # aumenta cada vez que se registra una venta
+    montobonos = DecimalField(max_digits=10, decimal_places=4) # aumenta de 500 en 500
 
     class Meta:
         database = db
